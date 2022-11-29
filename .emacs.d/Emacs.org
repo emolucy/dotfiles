@@ -1,5 +1,5 @@
 
-#+title Emolucy Emacs Configuration
+#+title: Emolucy Emacs Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
 
 * General Emacs Config
@@ -156,8 +156,6 @@ Remember to run `all-the-icons-install-fonts` on new systems.
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 15)))
 
-;; M-x all-the-icons-install-fonts
-
 #+end_src
 
 ** Ivy and Counsel
@@ -266,7 +264,8 @@ Powerful keybinding utility. Works well with EVIL mode.
     "b" 'switch-to-buffer
     "t"  '(:ignore t :which-key "toggles")
     "tt" '(counsel-load-theme :which-key "choose theme")
-    "ts" '(hydra-text-scale/body :which-key "scale text")))
+    "ts" '(hydra-text-scale/body :which-key "scale text")
+    "tb" '(org-babel-tangle :which-key "tangle the current buffer")))
 
 (defun split-and-follow-horizontally ()
   (interactive)
@@ -432,21 +431,6 @@ Allows aliasing common structures and tab completion.
 (org-babel-do-load-languages
   'org-babel-load-languages
   '((emacs-lisp . t)))
-
-#+end_src
-
-** Auto-tangle Configuration Files
-
-#+begin_src emacs-lisp
-
-;; automatically tangle Emacs.org on save
-(defun emo/org-babel-tangle-config ()
-  (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/.emacs.d/Emacs.org"))
-    (let ((org-confirm-babel-evaluate nil))
-      (org-babel-tangle))))
-
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'emo/org-babel-tangle-config)))
 
 #+end_src
 
