@@ -3,5 +3,3 @@ backup/
 elpa/
 projectile-bookmarks.eld
 transient/
-custom.el
-init.el
